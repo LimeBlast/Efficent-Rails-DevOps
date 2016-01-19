@@ -12,4 +12,4 @@
     - { role: ssh, tags: ssh }
     - { role: iptables, tags: iptables }
     - { role: unneeded_services, tags: unneeded_services }
-
+    - { role: disable_ipv6, tags: disable_ipv6 }
