@@ -9,4 +9,5 @@
     - { role: ntp, tags: ntp }
     - { role: git, tags: git }
     - { role: root_password, tags: root_password }
+    - { role: ssh, tags: ssh }
 
