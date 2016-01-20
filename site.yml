@@ -16,3 +16,4 @@
     - { role: nginx, tags: nginx }
     - { role: mysql, tags: mysql }
     - { role: nodejs, tags: nodejs }
+    - { role: application_user, tags: application_user }
