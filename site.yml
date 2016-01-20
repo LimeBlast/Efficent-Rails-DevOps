@@ -15,3 +15,4 @@
     - { role: disable_ipv6, tags: disable_ipv6 }
     - { role: nginx, tags: nginx }
     - { role: mysql, tags: mysql }
+    - { role: nodejs, tags: nodejs }
