@@ -1,5 +1,0 @@
----
-
-- name: Set root password
-  user: name=root
-        password={{ crypted_root_password }}

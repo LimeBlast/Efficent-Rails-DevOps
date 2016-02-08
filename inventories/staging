@@ -1,5 +1,0 @@
-[rails]
-192.168.1.100
-
-[staging:children]
-rails
