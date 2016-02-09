@@ -12,13 +12,18 @@ Example app following the [Efficient Rails DevOps](http://www.efficientrailsdevo
 
 ## IMPORTANT
 
-This repo uses [ansible-vault](http://docs.ansible.com/ansible/playbooks_vault.html) to encrypt its configuration and other sensitive information, but seeing as the password used to encrypt it is made public (listed below, and in the book), it is not advised you use it *as is*, and instead re-encrypt the following files manually:
+This repo uses [ansible-vault](http://docs.ansible.com/ansible/playbooks_vault.html) to encrypt its configuration and other sensitive information, but seeing as the password used to encrypt it is made public (listed below, and in the book), it is not advised you use it *as is*, and instead re-encrypt the relevant files yourself.
+
+### Ansible Vault
+
+- Password `erdo`.
+
+- To create a new vault, run `ansible-vault encrypt path/to/file`
+- To edit a vault file, run `ansible-vault edit path/to/file`
+
+#### Encrypted files
 
 - `group_vars/all`
-
-### Password
-
-`erdo`
 
 ## IP address
 
