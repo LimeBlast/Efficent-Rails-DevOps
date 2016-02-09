@@ -10,24 +10,28 @@ Example app following the [Efficient Rails DevOps](http://www.efficientrailsdevo
 - Update the yum packages using `ssh root@192.168.1.100 "yum -y update"`
 - `ssh root@192.168.1.100 "touch /.autorelabel && reboot"` will relabel our filesystem (which only needs to happen once).
 
-## Important note
+## IMPORTANT
 
-### Private keys
+This repo uses [ansible-vault](http://docs.ansible.com/ansible/playbooks_vault.html) to encrypt its configuration and other sensitive information, but seeing as the password used to encrypt it is made public (listed below, and in the book), it is not advised you use it *as is*, and instead re-encrypt the following files manually:
 
-This repo contains a publicly accessible private key, making the server vulnerable if you choose to use this playbook unmodified. With this in mind, if you wish to use this playbook you need replace the `authorized_keys`, `id_rsa`, and `id_rsa.pub` files in the `roles/application_user/files/` folder (following the instructions in pages *Application user* chapter) and keep them private. This repo is for reference purposes only.
+- `group_vars/all`
 
-### IP address
+### Password
+
+`erdo`
+
+## IP address
 
 This repo is based on the IP subgroup of `192.168.253.*`. If your subgroup is different and you need to modify the IP address, you'll need to update both the `Vagrantfile` and `inventories/staging` files.
 
-### Installing Ansible
+## Installing Ansible
 
 ```bash
 pip install --upgrade pip
 php install ansible
 ```
 
-#### No Python?
+### No Python?
 
 If the commands above don't work, you probably don't have Python installed. The book recommends you use [pyenv](https://github.com/yyuu/pyenv) to install python, as it'll give you the ability to switch between different version, much like the benefits obtained by using rbenv.
 
