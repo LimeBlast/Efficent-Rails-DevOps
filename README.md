@@ -14,7 +14,7 @@ Example app following the [Efficient Rails DevOps](http://www.efficientrailsdevo
 
 ### Private keys
 
-This repo contains a publically accessible private key, making the server vulnurable if you choose to use this playbook unmodified. With this in mind, if you wish to use this playbook you need replace the `authorized_keys`, `id_rsa`, and `id_rsa.pub` files in the `roles/application_user/files/` folder (following the instructions in pages *Application user* chapter) and keep them private. This repo is for reference purposes only.
+This repo contains a publicly accessible private key, making the server vulnerable if you choose to use this playbook unmodified. With this in mind, if you wish to use this playbook you need replace the `authorized_keys`, `id_rsa`, and `id_rsa.pub` files in the `roles/application_user/files/` folder (following the instructions in pages *Application user* chapter) and keep them private. This repo is for reference purposes only.
 
 ### IP address
 
