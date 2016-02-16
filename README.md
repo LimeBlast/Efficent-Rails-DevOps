@@ -6,7 +6,7 @@ Example app following the [Efficient Rails DevOps](http://www.efficientrailsdevo
 
 - Clone the repo and change into the directory.
 - Run `vagrant up` to start the VM.
-- Start the playbook with `ansible-playbook -i inventories/staging site.yml`.
+- Start the playbook with `ansible-playbook -i inventories/staging site.yml --ask-vault-pass`.
 - Update the yum packages using `ssh root@192.168.1.100 "yum -y update"`
 - `ssh root@192.168.1.100 "touch /.autorelabel && reboot"` will relabel our filesystem (which only needs to happen once).
 
