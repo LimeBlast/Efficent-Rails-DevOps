@@ -7,3 +7,4 @@
   - { role: cron, tags: cron }
   - { role: timezone, tags: timezone }
   - { role: chrony, tags: chrony }
+  - { role: git, tags: git }
