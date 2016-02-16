@@ -26,6 +26,10 @@ This repo uses [ansible-vault](http://docs.ansible.com/ansible/playbooks_vault.h
 
 - `group_vars/all`
 
+### Generate crypted password (for root_password task)
+
+    python -c 'import crypt; print crypt.crypt("PASSWORD_HERE", crypt.mksalt(crypt.METHOD_SHA512))'
+
 ## IP address
 
 This repo is based on the IP subgroup of `192.168.253.*`. If your subgroup is different and you need to modify the IP address, you'll need to update both the `Vagrantfile` and `inventories/staging` files.
