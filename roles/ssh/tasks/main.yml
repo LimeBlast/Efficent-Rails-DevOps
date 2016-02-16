@@ -1,0 +1,55 @@
+---
+
+- name: Remove unwanted occurrences of PasswordAuthentication
+  lineinfile: dest=/etc/ssh/sshd_config
+              regexp="{{ item }}"
+              state=absent
+  notify: Restart SSH
+  with_items:
+    - "^#PasswordAuthentication"
+    - "^PasswordAuthentication (?!no)"
+
+- name: Set PasswordAuthentication
+  lineinfile: dest=/etc/ssh/sshd_config
+              line="PasswordAuthentication no"
+              state=present
+              insertafter="^# To disable tunneled clear text passwords, change to no here!"
+  notify: Restart SSH
+
+- name: Remove unwanted occurrences of ListenAddress
+  lineinfile: dest=/etc/ssh/sshd_config
+              regexp="{{ item }}"
+              state=absent
+  with_items:
+    - "^#ListenAddress"
+    - "^ListenAddress (?!{{ ip_address }})"
+  notify: Restart SSH
+
+- name: Set ListenAddress
+  lineinfile: dest=/etc/ssh/sshd_config
+              line="ListenAddress {{ ip_address }}"
+              state=present
+              insertafter="^#?AddressFamily"
+  notify: Restart SSH
+
+- name: Remove unwanted occurrences of AddressFamily
+  lineinfile: dest=/etc/ssh/sshd_config
+              regexp="{{ item }}"
+              state=absent
+  with_items:
+    - "^#AddressFamily"
+    - "^AddressFamily (?!inet)"
+  notify: Restart SSH
+
+- name: Set AddressFamily
+  lineinfile: dest=/etc/ssh/sshd_config
+              line="AddressFamily inet"
+              state=present
+              insertafter="^#?Port"
+  notify: Restart SSH
+
+- name: Remove language environment variables
+  replace: dest=/etc/ssh/sshd_config
+           regexp="AcceptEnv(.*) LANG(?:UAGE)?(.*)"
+           replace="AcceptEnv\1\2"
+  notify: Restart SSH
