@@ -5,3 +5,4 @@
   roles:
   - { role: selinux, tags: selinux }
   - { role: cron, tags: cron }
+  - { role: timezone, tags: timezone }
