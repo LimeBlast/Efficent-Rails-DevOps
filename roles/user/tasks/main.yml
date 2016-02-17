@@ -4,6 +4,13 @@
   user: name="{{ name }}"
         comment="{{ comment }}"
 
+- name: Create .ssh directory for {{ name }}
+  file: path=~{{ name }}/.ssh
+        state=directory
+        owner={{ name }}
+        group={{ name }}
+        mode=0700
+
 - name: Add authorized keys for {{ name }}
   copy: content={{ authorized_keys[name] }}
         dest=~{{ name }}/.ssh/authorized_keys
