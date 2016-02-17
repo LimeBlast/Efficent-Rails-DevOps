@@ -1,0 +1,38 @@
+---
+
+- name: Install MariaDB server
+  yum: pkg=mariadb-server
+       state=present
+
+- name: Enable and start MariaDB server
+  service: name=mariadb
+           state=started
+           enabled=yes
+
+- name: Install MariaDB client tools
+  yum: pkg=mariadb
+       state=present
+
+- name: Install MySQL-python
+  yum: pkg=MySQL-python
+       state=present
+
+- name: Configure root user
+  mysql_user: name=root
+              password={{ database_root_password }}
+              priv=*.*:ALL,GRANT
+              host={{ item }}
+  with_items:
+    - 127.0.0.1
+    - localhost
+
+- name: Setup my.cnf
+  template: src=my.cnf.j2
+            dest=/root/.my.cnf
+            owner=root
+            group=root
+            mode=0600
+
+- name: Remove test database
+  mysql_db: name=test
+            state=absent
