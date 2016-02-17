@@ -1,0 +1,40 @@
+---
+
+- name: Enable and start firewalld
+  service: name=firewalld
+           enabled=yes
+           state=started
+
+- name: Get network interface configuration files
+  shell: ls /etc/sysconfig/network-scripts/ifcfg-*
+  changed_when: false
+  failed_when: false
+  register: config_files
+
+- name: Change default zone
+  lineinfile: dest={{ item }}
+              regexp="^ZONE="
+              line="ZONE=block"
+              state=present
+  with_items: config_files.stdout_lines|default([])
+
+- name: Allow services
+  firewalld: service={{ item }}
+             zone=block
+             state=enabled
+             permanent=yes
+             immediate=yes
+  with_items:
+    - ssh
+    - http
+    - https
+
+- name: Check default zone
+  shell: firewall-cmd --get-default-zone | grep block
+  changed_when: false
+  failed_when: false
+  register: default_zone
+
+- name: Change default zone
+  shell: firewall-cmd --set-default-zone=block
+  when: default_zone.rc != 0

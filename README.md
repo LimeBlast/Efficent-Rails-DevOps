@@ -4,12 +4,12 @@ Example app following the [Efficient Rails DevOps](http://www.efficientrailsdevo
 
 ## Get up and running
 
-- Clone the repo and change into the directory.
-- Run `vagrant up` to start the VM.
-- Start the playbook with `ansible-playbook -i inventories/staging site.yml --ask-vault-pass`.
+- Clone the repo and change into the directory
+- Run `vagrant up` to start the VM
+- Start the playbook with `ansible-playbook -i inventories/staging site.yml --ask-vault-pass`
     - to run an individual tags, use  `ansible-playbook -i inventories/staging --tags TAG_NAMES_HERE site.yml --ask-vault-pass`
 - Update the yum packages using `ssh root@192.168.1.100 "yum -y update"`
-- `ssh root@192.168.1.100 "touch /.autorelabel && reboot"` will relabel our filesystem (which only needs to happen once).
+- `ssh root@192.168.1.100 "touch /.autorelabel && reboot"` will relabel our filesystem (which only needs to happen once)
 
 ## IMPORTANT
 
@@ -17,7 +17,7 @@ This repo uses [ansible-vault](http://docs.ansible.com/ansible/playbooks_vault.h
 
 ### Ansible Vault
 
-- Password `erdo`.
+- Password `erdo`
 
 - To create a new vault, run `ansible-vault encrypt path/to/file`
 - To edit a vault file, run `ansible-vault edit path/to/file`
