@@ -9,7 +9,8 @@
   - { role: chrony, tags: chrony }
   - { role: git, tags: git }
   - { role: root_password, tags: root_password }
-  - {  role: ssh, tags: ssh }
-  - {  role: firewalld, tags: firewalld }
-  - {  role: unneeded_services, tags: unneeded_services }
-  - {  role: ipv6, tags: ipv6 }
+  - { role: ssh, tags: ssh }
+  - { role: firewalld, tags: firewalld }
+  - { role: unneeded_services, tags: unneeded_services }
+  - { role: ipv6, tags: ipv6 }
+  - { role: user, tags: user_app, name: app, comment: "Application user" }
