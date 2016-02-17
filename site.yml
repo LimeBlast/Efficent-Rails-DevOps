@@ -11,3 +11,4 @@
   - { role: root_password, tags: root_password }
   - {  role: ssh, tags: ssh }
   - {  role: firewalld, tags: firewalld }
+  - {  role: unneeded_services, tags: unneeded_services }
