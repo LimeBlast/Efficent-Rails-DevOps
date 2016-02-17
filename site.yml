@@ -14,3 +14,4 @@
   - { role: unneeded_services, tags: unneeded_services }
   - { role: ipv6, tags: ipv6 }
   - { role: user, tags: user_app, name: app, comment: "Application user" }
+  - { role: nginx, tags: nginx }
