@@ -1,0 +1,102 @@
+---
+
+- name: Create base directory
+  file: path=/var/www
+        state=directory
+
+- name: Create myapp directory structure
+  file: path=/var/www/myapp/{{ item }}
+        state=directory
+        owner=app
+  with_items:
+    - application
+    - shared
+    - shared/config
+    - shared/log
+    - shared/log/archive
+    - shared/pids
+    - shared/tmp
+    - shared/tmp/cache
+
+- name: Clone codebase
+  git: repo=https://github.com/relativkreativ/erdo-sample-app.git
+       dest=/var/www/myapp/application
+       version=master
+       update=no
+       accept_hostkey=yes
+  become: yes
+  become_user: app
+  register: clone_codebase
+
+- name: Lock Ruby version
+  copy: content=2.2.4
+        dest=/var/www/myapp/.ruby-version
+        owner=app
+        group=app
+        mode=0600
+  register: lock_ruby_version
+
+- name: Set default RAILS_ENV
+  copy: content="RAILS_ENV=production"
+        dest=/home/app/.rbenv/vars
+        owner=app
+        group=app
+        mode=0600
+
+- name: Set environment variables
+  copy: src=rbenv-vars
+        dest=/var/www/myapp/.rbenv-vars
+        owner=app
+        group=app
+        mode=0600
+
+- name: Copy Uniccorn configuration
+  template: src=unicorn.rb.j2
+            dest=/var/www/myapp/shared/config/unicorn.rb
+            owner=app
+
+- name: Configure logrotate
+  copy: src=logrotate
+        dest=/etc/logrotate.d/myapp
+
+- name: Install semanage tool
+  yum: pkg=policycoreutils-python
+       state=present
+
+- name: Check SELinux type of logs
+  shell: ls -dZ /var/www/myapp/shared/log | grep var_log_t
+  change_when: false
+  failed_when: false
+  register: correct_log_type
+
+- name: Adjust SELinux type of logs
+  command: semenage fcontext -a -t var_log_t "/var/www/myapp/shared/log(/.*)?"
+  when: correct_log_type.rc != 0
+
+- name: Relabel logs
+  command: restorecon -R /var/www/myapp/shared/log
+  when: correct_log_type.rc != 0
+
+- name: Remove files and directories to be symlinked
+  file: path=/var/www/myapp/application/{{ item }}
+        state=absent
+  with_items:
+    - config/database.yml
+    - config/unicorn.rb
+    - log
+    - tmp
+  when: clone_codebase|changed
+
+- name: Symlink shared files and directories
+  file: src=/var/www/myapp/shared/{{ items }}
+        dest=/var/www/myapp/application/{{ items }}
+        state=link
+        force=yes
+  with_items:
+    - config/database.yml
+    - config/unicorn.rb
+    - log
+    - tmp
+  when: clone_codebase|changed
+
+# jump to section 4.2.8

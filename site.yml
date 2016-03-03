@@ -18,3 +18,4 @@
   - { role: mariadb, tags: mariadb }
   - { role: nodejs, tags: nodejs }
   - { role: ruby, tags: ruby_app, user: app, version: 2.2.4 }
+  - { role: myapp, tags: myapp }
