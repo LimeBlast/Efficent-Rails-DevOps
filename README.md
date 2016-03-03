@@ -32,7 +32,7 @@ This repo uses [ansible-vault](http://docs.ansible.com/ansible/playbooks_vault.h
 
 ## IP address
 
-This repo is based on the IP subgroup of `192.168.253.*`. If your subgroup is different and you need to modify the IP address, you'll need to update both the `Vagrantfile` and `inventories/staging` files.
+This repo is based on the IP subgroup of `192.168.1.*`. If your subgroup is different and you need to modify the IP address, you'll need to update both the `Vagrantfile` and `inventories/staging` files.
 
 ## Installing Ansible
 
@@ -43,7 +43,7 @@ php install ansible
 
 ### No Python?
 
-If the commands above don't work, you probably don't have Python installed. The book recommends you use [pyenv](https://github.com/yyuu/pyenv) to install python, as it'll give you the ability to switch between different version, much like the benefits obtained by using rbenv.
+If the commands above don't work, you probably don't have Python 2 installed. The book recommends you use [pyenv](https://github.com/yyuu/pyenv) to install python, as it'll give you the ability to switch between different version, much like the benefits obtained by using rbenv.
 
 For a a quick and dirty install process on OS X:
 

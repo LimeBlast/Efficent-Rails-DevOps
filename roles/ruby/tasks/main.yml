@@ -53,7 +53,7 @@
        state=present
 
 - name: Install Bundler
-  command: ~{{ user }}/.rbenv/shums/gem install bundler
+  command: ~{{ user }}/.rbenv/shims/gem install bundler
            creates=~{{ user }}/.rbenv/versions/{{ version }}/bin/bundle
   environment:
     RBENV_VERSION: "{{ version }}"
