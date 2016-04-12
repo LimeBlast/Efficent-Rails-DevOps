@@ -39,7 +39,7 @@ This repo is based on the IP subgroup of `192.168.1.*`. If your subgroup is diff
 
 ```bash
 pip install --upgrade pip
-php install ansible
+pip install ansible
 ```
 
 ### No Python?
